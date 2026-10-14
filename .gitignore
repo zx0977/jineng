@@ -1,23 +1,26 @@
+# ===== 前端 frontend =====
+frontend/node_modules/
+frontend/dist/
+frontend/.idea/
+frontend/.vscode/
+frontend/yarn-error.log
+frontend/npm-debug.log*
+
+# ===== 后端 backend =====
+backend/**/target/
+backend/**/.idea/
+backend/**/*.iml
+backend/**/*.log
+backend/**/.mvn/wrapper/maven-wrapper.jar
+
+# ===== 系统与编辑器 =====
 .DS_Store
-node_modules
-/dist
+Thumbs.db
+*.log
+.idea/
+.vscode/
+*.iml
 
-
-# local env files
+# ===== 本地环境 =====
 .env.local
 .env.*.local
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?

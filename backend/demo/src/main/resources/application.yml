@@ -1,0 +1,37 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jineng?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+#\u56FA\u5B9A\u7AEF\u53E3\u53F7\u4E3A9090
+server:
+  port: 9090
+#\u914D\u7F6Emybatis\u7684\u65E5\u5FD7, \u6307\u5B9A\u8F93\u51FA\u5230\u63A7\u5236\u53F0
+mybatis:
+  configuration:
+    # \u5F00\u542F\u9A7C\u5CF0\u547D\u540D\u89C4\u5219\u6620\u5C04  \u8868 user_name  -> \u5B9E\u4F53\u7C7B userName
+    map-underscore-to-camel-case: true
+    # \u63A7\u5236\u53F0\u6253\u5370SQL\u65E5\u5FD7
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# \u4F7F\u7528\u6570\u636E\u5E93\u7684\u81EA\u589E\u7B56\u7565
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+
+#spring\u4E8B\u52A1\u7BA1\u7406\u65E5\u5FD7
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          support:
+            JdbcTransactionManager: debug
