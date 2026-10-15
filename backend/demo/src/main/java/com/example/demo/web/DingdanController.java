@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin // 在Controller类上加这个注解
 @RestController
@@ -21,7 +22,16 @@ public class DingdanController {
         List<Dingdan> all = dingdanService.DingdanAll();
         return Result.success(all);
     }
-
+    @GetMapping("/fanlist")
+    public Result FanList(){
+        List<Map<String,Object>> fan=dingdanService.FanList();
+        return Result.success(fan);
+    }
+    @GetMapping("/yonglist")
+    public Result YongList(){
+        List<Map<String,Object>> yong=dingdanService.YongList();
+        return Result.success(yong);
+    }
     @PostMapping("/dingdanadd")
     public Result Dingdanadd(@RequestBody Dingdan dingdan) {
 

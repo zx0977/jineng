@@ -9,9 +9,18 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
+import java.util.Map;
+
 
 @Mapper
 public interface DingdanMapper extends BaseMapper<Dingdan> {
+
+    @Select("SELECT DISTINCT c.id ,c.fanname FROM fancai c LEFT JOIN dingdan s ON c.id = s.id WHERE c.fanname IS NOT NULL")
+    List<Map<String,Object>> getFancaiList();
+
+
+    @Select("SELECT DISTINCT d.id , d.name FROM yonghu d LEFT JOIN dingdan s ON d.id = s.id WHERE d.name IS NOT NULL")
+    List<Map<String,Object>> getYonghuList();
 
     @Select("select * from dingdan")
     public List<Dingdan> DingdanAll();

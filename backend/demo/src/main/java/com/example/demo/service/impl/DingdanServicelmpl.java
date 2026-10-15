@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -25,6 +26,19 @@ public class DingdanServicelmpl implements DingdanService {
         List<Dingdan> all = dingdanMapper.DingdanAll();
         return all;
     }
+
+    @Override
+    public List<Map<String,Object>> FanList() {
+        List<Map<String,Object>> fan=dingdanMapper.getFancaiList();
+        return fan;
+    }
+
+    @Override
+    public List<Map<String,Object>> YongList() {
+        List<Map<String,Object>> yong=dingdanMapper.getYonghuList();
+        return yong;
+    }
+
     //新增订单
     @Override
     public Result Dingdanadd(Dingdan dingdan) {

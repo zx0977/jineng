@@ -24,11 +24,25 @@
 			<div style="display: flex; align-items: center; flex-wrap:wrap;">
 				<div>
 					<span style="margin-left: 15px;">订单名</span>
-					<el-input v-model="OrderName" placeholder="请输入订单名名" style="width: 300px; margin-left: 10px;"></el-input>
+					<el-select v-model="form.fanname" style="width: 300px; margin-left: 10px;" placeholder="请选择订单名">
+					    <el-option
+					      v-for="item in fanData"
+					      :key="item.id" 
+						  :label="item.fanname" 
+					      :value="item.fanname">
+					    </el-option>
+					  </el-select>
 				</div>
-				<div>
+				<div style="margin-top: 20px;">
 					<span style="margin-left: 15px;">用户名</span>
-					<el-input v-model="UserName" placeholder="请输入用户名" style="width: 300px; margin-left: 10px; margin-top: 10px;"></el-input>
+					<el-select v-model="form.yongname" style="width: 300px; margin-left: 10px;" placeholder="请选择用户名">
+					    <el-option
+					      v-for="item in yongData"
+					      :key="item.id" 
+					      :label="item.name" 
+					      :value="item.name">
+					    </el-option>
+					  </el-select>
 				</div>
 			</div>
 		    <span slot="footer" class="dialog-footer">
@@ -106,8 +120,8 @@
 				label-class-name="lcn"
 				width="180">
 				<template slot-scope="scope">
-				<el-button @click="editItem(scope.row,scope.$index)" type="text" size="small">
-					<i class="el-icon-edit"></i>修改</el-button>
+				<!-- <el-button @click="editItem(scope.row,scope.$index)" type="text" size="small">
+					<i class="el-icon-edit"></i>修改</el-button> -->
 				<el-button @click="del(scope.row,scope.$index)" type="text" size="small">
 					<i class="el-icon-delete"></i>删除</el-button>
 				</template>
@@ -128,25 +142,43 @@ export default {
 				OrderName:'',
 				UserName:''
 			},
+			form:{
+				fanname:'',
+				yongname:''
+			},
 	       newlyAdded: false,
-			  OrderName:'',
-			  UserName:'',
 			  Orderone:'',
 			  OrderNametwo:'',
 			  UserNamethree:'',
 			  id:'',
 			  tableData:[],
+			  fanData:[],
+			  yongData:[],
 			  modify:false,
 	     };
 	   },
 		created(){
 			  this.getdata()
+			  this.getfan()
+			  this.getyong()
 		},
 		methods:{
 			getdata(){
 				axios.get('http://localhost:9090/dingdanall').then(res=>{
 					console.log(res.data.data)
 					this.tableData=res.data.data
+				})
+			},
+			getfan(){
+				axios.get('http://localhost:9090/fanlist').then(res=>{
+					console.log(res.data.data)
+					this.fanData=res.data.data
+				})
+			},
+			getyong(){
+				axios.get('http://localhost:9090/yonglist').then(res=>{
+					console.log(res.data.data)
+					this.yongData=res.data.data
 				})
 			},
 		//查找
@@ -173,7 +205,7 @@ export default {
 		},
 		//增加
 		addItem() {
-				if(this.OrderName.trim()==''&& this.UserName.trim()=='' ){
+				if(this.form.fanname.trim()==''&& this.form.yongname.trim()=='' ){
 					this.$message({
 						message:'添加条件不能为空',
 						type:'warning',
@@ -182,12 +214,12 @@ export default {
 					return
 				}
 				axios.post('http://localhost:9090/dingdanadd',{
-					OrderName:this.OrderName,
-					UserName:this.UserName
+					OrderName:this.form.fanname,
+					UserName:this.form.yongname
 				}).then(res=>{
 					console.log(res.data.data)
-					this.OrderName=''
-					this.UserName=''
+					this.form.fanname=''
+					this.form.yongname=''
 					this.newlyAdded=false
 					this.getdata()
 				})
@@ -220,33 +252,34 @@ export default {
 		    },
 			//修改
 			//获取要修改数据放在修改框
-			editItem(row,index) {
-				this.id=row.id
-				axios.get('http://localhost:9090/dingdan/'+row.id).then(res=>{
-					this.Orderone=res.data.data.Order
-					this.OrderNametwo=res.data.data.OrderName;
-					this.UserNamethree=res.data.data.UserName
-				});
-				this.modify=true;
-				this.index = index;
-			},
+			// editItem(row,index) {
+			// 	console.log(row)
+			// 	this.id=row.id
+			// 	axios.get('http://localhost:9090/dingdan/'+row.id).then(res=>{
+			// 		this.Orderone=res.data.data.Order
+			// 		this.OrderNametwo=res.data.data.OrderName;
+			// 		this.UserNamethree=res.data.data.UserName
+			// 	});
+			// 	this.modify=true;
+			// 	this.index = index;
+			// },
 			// 确认修改
-			updateItem() {
-				axios.put('http://localhost:9090/dingdanxiua',{
-					id:this.id,
-					Order:this.Orderone,
-					OrderName:this.OrderNametwo,
-					UserName:this.UserNamethree
-				}).then(res=>{
-					console.log(res)
-					this.Orderone=''
-					this.OrderNametwo=''
-					this.UserNamethree=''
-					this.$message.success('修改成功'); // 加成功提示
-					this.modify=false;
-					this.getdata()
-				})
-			}
+			// updateItem() {
+			// 	axios.put('http://localhost:9090/dingdanxiua',{
+			// 		id:this.id,
+			// 		Order:this.Orderone,
+			// 		OrderName:this.OrderNametwo,
+			// 		UserName:this.UserNamethree
+			// 	}).then(res=>{
+			// 		console.log(res)
+			// 		this.Orderone=''
+			// 		this.OrderNametwo=''
+			// 		this.UserNamethree=''
+			// 		this.$message.success('修改成功'); // 加成功提示
+			// 		this.modify=false;
+			// 		this.getdata()
+			// 	})
+			// }
 		}
 }
 </script>

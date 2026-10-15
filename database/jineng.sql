@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 14/10/2026 20:37:25
+ Date: 15/10/2026 18:42:24
 */
 
 SET NAMES utf8mb4;
@@ -50,15 +50,17 @@ CREATE TABLE `dingdan`  (
   `time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `order`(`order`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of dingdan
 -- ----------------------------
-INSERT INTO `dingdan` VALUES (1, '1', '烤鸭拌饭123', '张三', '2026-10-14 16:42:29');
-INSERT INTO `dingdan` VALUES (2, '2', '大众套餐', '李四', '2026-10-13 16:52:42');
-INSERT INTO `dingdan` VALUES (3, '3', '豆花鱼', '王五', '2026-10-13 16:53:00');
+INSERT INTO `dingdan` VALUES (6, '1792056934179356', '烤鸭拌饭123231', '刘某', '2026-10-15 17:35:34');
 INSERT INTO `dingdan` VALUES (5, '1791886393433128', '胡辣汤', '王二', '2026-10-13 18:13:13');
+INSERT INTO `dingdan` VALUES (11, '1792059095512309', '自选菜', '张某', '2026-10-15 18:11:36');
+INSERT INTO `dingdan` VALUES (7, '1792057555217302', '豆花鱼', '齐某', '2026-10-15 17:45:55');
+INSERT INTO `dingdan` VALUES (9, '1792058925614164', '豆花鱼', '刘某', '2026-10-15 18:08:46');
+INSERT INTO `dingdan` VALUES (10, '1792058960361929', '米村拌饭', '齐某', '2026-10-15 18:09:20');
 
 -- ----------------------------
 -- Table structure for fancai
@@ -89,7 +91,7 @@ CREATE TABLE `yonghu`  (
   `phone` char(11) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `position` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of yonghu
